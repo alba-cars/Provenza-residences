@@ -1412,6 +1412,115 @@
             });
         });
     </script>
+    <script>
+        (function () {
+            /* set your form id here */
+            const FORM_ID = 'provenza-residences-eoi-form';
+
+            /* list every parameter you want to keep */
+            const keys = [
+                'utm_source',
+                'utm_medium',
+                'utm_campaign',
+                'utm_term',
+                'utm_content',
+                'keyword'          // alias for CRMs that want a field literally named keyword
+            ];
+
+            /* read the current query string */
+            const qs = new URLSearchParams(window.location.search);
+
+            /* pull in any stored values when the current URL does not show them */
+            keys.forEach(k => {
+                if (!qs.has(k) && localStorage.getItem(k)) {
+                    qs.set(k, localStorage.getItem(k));
+                }
+            });
+
+            /* save fresh values for later pages */
+            keys.forEach(k => {
+                if (qs.has(k)) {
+                    localStorage.setItem(k, qs.get(k));
+                }
+            });
+
+            const form = document.getElementById(FORM_ID);
+            if (!form) return;
+
+            /* write each value into its hidden input, create one if missing */
+            keys.forEach(k => {
+                let input = form.querySelector(input[name = "${k}"]);
+                if (!input) {
+                    input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = k;
+                    form.appendChild(input);
+                }
+
+                if (k === 'keyword') {
+                    input.value = qs.get('utm_term') || '';
+                } else {
+                    input.value = qs.get(k) || '';
+                }
+            });
+        })();
+    </script>
+
+    <script>
+        (function () {
+            /* set your form id here */
+            const FORM_ID = 'provenza-residences-brochure-form';
+
+            /* list every parameter you want to keep */
+            const keys = [
+                'utm_source',
+                'utm_medium',
+                'utm_campaign',
+                'utm_term',
+                'utm_content',
+                'keyword'          // alias for CRMs that want a field literally named keyword
+            ];
+
+            /* read the current query string */
+            const qs = new URLSearchParams(window.location.search);
+
+            /* pull in any stored values when the current URL does not show them */
+            keys.forEach(k => {
+                if (!qs.has(k) && localStorage.getItem(k)) {
+                    qs.set(k, localStorage.getItem(k));
+                }
+            });
+
+            /* save fresh values for later pages */
+            keys.forEach(k => {
+                if (qs.has(k)) {
+                    localStorage.setItem(k, qs.get(k));
+                }
+            });
+
+            const form = document.getElementById(FORM_ID);
+            if (!form) return;
+
+            /* write each value into its hidden input, create one if missing */
+            keys.forEach(k => {
+                let input = form.querySelector(input[name = "${k}"]);
+                if (!input) {
+                    input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = k;
+                    form.appendChild(input);
+                }
+
+                if (k === 'keyword') {
+                    input.value = qs.get('utm_term') || '';
+                } else {
+                    input.value = qs.get(k) || '';
+                }
+            });
+        })();
+    </script>
+
+
     <Script>
         $(document).ready(function () { $(".w-webflow-badge").removeClass("w-webflow-badge").empty(); });
     </Script>
